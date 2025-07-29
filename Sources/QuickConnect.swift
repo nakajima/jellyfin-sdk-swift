@@ -7,6 +7,9 @@
 //
 
 import Foundation
+#if canImport(OpenCombine)
+import OpenCombine
+#endif
 
 /// A provider for the Quick Connect authorization flow.
 ///

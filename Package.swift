@@ -18,6 +18,7 @@ let package = Package(
     dependencies: [
         .package(url: "https://github.com/kean/Get", from: "2.1.6"),
         .package(url: "https://github.com/CreateAPI/URLQueryEncoder", from: "0.2.0"),
+        .package(url: "https://github.com/OpenCombine/OpenCombine", from: "0.14.0"),
     ],
     targets: [
         .target(
@@ -25,6 +26,7 @@ let package = Package(
             dependencies: [
                 .product(name: "Get", package: "Get"),
                 .product(name: "URLQueryEncoder", package: "URLQueryEncoder"),
+                .product(name: "OpenCombine", package: "OpenCombine", condition: .when(platforms: [.linux]))
             ],
             path: "Sources",
             exclude: [

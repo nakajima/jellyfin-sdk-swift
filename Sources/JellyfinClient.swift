@@ -9,6 +9,10 @@
 import Foundation
 import Get
 
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
+
 /// Basic wrapper of `Get.APIClient` with helper methods for interfacing with the `JellyfinAPI` package,
 /// like injecting required headers for API calls with the current access token.
 public final class JellyfinClient {
@@ -119,6 +123,7 @@ public final class JellyfinClient {
         try await _apiClient.data(for: request, delegate: delegate, configure: configure)
     }
 
+    #if !os(Linux)
     public func download(
         for request: Request<some Any>,
         delegate: URLSessionDownloadDelegate? = nil,
@@ -133,6 +138,7 @@ public final class JellyfinClient {
     ) async throws -> Response<URL> {
         try await _apiClient.download(resumeFrom: resumeData, delegate: delegate)
     }
+    #endif
 
     private func authHeaders() -> String {
         let fields = [
